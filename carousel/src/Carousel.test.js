@@ -13,7 +13,7 @@ it("matches snapshot", function () {
   expect(asFragment()).toMatchSnapshot();
 });
 
-it("works when you click on the right arrow", function () {
+it("works when you click on the left / right arrow", function () {
   const { queryByTestId, queryByAltText } = render(<Carousel />);
 
   // expect the first image to show, but not the second
