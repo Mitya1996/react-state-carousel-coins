@@ -36,3 +36,27 @@ it("works when you click on the left / right arrow", function () {
   expect(queryByAltText("Photo by Richard Pasquarella on Unsplash")).toBeInTheDocument();
   expect(queryByAltText("Photo by Pratik Patel on Unsplash")).not.toBeInTheDocument();
 });
+
+it("doesn't show left / right arrow on first / last image", function () {
+  const { queryByTestId } = render(<Carousel />);
+
+  let leftArrow = queryByTestId("left-arrow");
+  const rightArrow = queryByTestId("right-arrow");
+
+  //only right arrow visible on first image
+  expect(leftArrow).not.toBeInTheDocument();
+  expect(rightArrow).toBeInTheDocument();
+
+  fireEvent.click(rightArrow);
+  leftArrow = queryByTestId("left-arrow");
+
+  //both arrows visible on second image
+  expect(leftArrow).toBeInTheDocument();
+  expect(rightArrow).toBeInTheDocument();
+
+  fireEvent.click(rightArrow);
+
+  //only left arrow visible on last image
+  expect(leftArrow).toBeInTheDocument();
+  expect(rightArrow).not.toBeInTheDocument();
+});
